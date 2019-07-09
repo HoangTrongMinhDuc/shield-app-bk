@@ -4,10 +4,12 @@ const cors = require("cors");
 const routes = require("./routes");
 const mongoose = require("mongoose");
 const config = require("./config");
+const Logger = require("./middleware/Logger");
 const db = mongoose.connection;
 
 //Global middleware
 app.use(cors());
+app.use(Logger);
 
 //Database connect
 mongoose.connect(config.DB_URL, { useNewUrlParser: true });
