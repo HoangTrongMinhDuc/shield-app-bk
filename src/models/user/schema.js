@@ -17,8 +17,7 @@ var userSchema = new Schema(
       type: String,
       required: true
     },
-    status: Boolean,
-    role: Boolean,
+    status: {type: Boolean, default: true},
     join_date: { type: Date, default: Date.now }
   },
   { versionKey: false }
