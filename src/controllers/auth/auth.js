@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config");
 const { getHashString } = require("../../helpers/HashHelper");
 const AccountService = require("../../objectservices/User");
+const ErrorHelper = require("../../helpers/ErrorHelper");
 
 const WrongAccountMsg = "Wrong email or password";
 
@@ -37,7 +38,7 @@ const isMatchPassword = (user, password) => {
 };
 
 const responseUserSession = (res, user) => {
-  let userInfo = JSON.parse(JSON.stringify(user));
+  let userInfo = user.toObject();
   delete userInfo.hash_password;
   delete userInfo.salt_password;
   res.json({ token: createToken(user.email), user: userInfo });
