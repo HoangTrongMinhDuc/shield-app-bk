@@ -1,5 +1,6 @@
 const router = require("express").Router();
+const bodyParser = require('body-parser')
 
-//Configure controller and route here
-router.get('/', (req, res)=>{res.send('sxxx')})
+router.post('/',bodyParser.json(), require('./create'));
+
 module.exports = router;

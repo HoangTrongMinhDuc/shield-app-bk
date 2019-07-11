@@ -1,6 +1,6 @@
 const router = require("express")();
 
-//Configure route for api here
 router.use("/auth", require("./controllers/auth"));
+router.use("/users", require("./controllers/user"));
 
 module.exports = router;

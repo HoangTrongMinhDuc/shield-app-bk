@@ -7,7 +7,8 @@ var userSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true
+      unique: true,
+      lowercase: true
     },
     hash_password: {
       type: String,
@@ -17,8 +18,7 @@ var userSchema = new Schema(
       type: String,
       required: true
     },
-    status: Boolean,
-    role: Boolean,
+    status: {type: Boolean, default: true},
     join_date: { type: Date, default: Date.now }
   },
   { versionKey: false }

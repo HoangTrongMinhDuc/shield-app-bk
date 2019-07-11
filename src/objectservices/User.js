@@ -9,8 +9,12 @@ const getUserById = async id => {
   return await UserModel.findById(id);
 };
 
-const getUserByEmail = async email => {
-  return await UserModel.findOne({ email });
+const getUserByEmailOrUsername = async (username, email) => {
+  return await UserModel.find({})
+    .or([{ username, email }])
+    .exec();
 };
 
-module.exports = { createUser, getUserById, getUserByEmail };
+const getUserByEmail = async email => await UserModel.findOne({ email }).exec();
+
+module.exports = { createUser, getUserById, getUserByEmailOrUsername, getUserByEmail };
