@@ -2,4 +2,4 @@ const schema = require('./schema');
 
 //Model middleware here
 
-module.exports = mongoose.model('User', schema);
+module.exports = mongoose.model('Category', schema);
