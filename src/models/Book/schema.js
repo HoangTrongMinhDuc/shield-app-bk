@@ -1,8 +1,7 @@
 const Schema = require("mongoose").Schema;
 
-var bookSchema = new Schema(
+const bookSchema = new Schema(
   {
-    shortId: {type: String, required: true, unique: true},
     title: { type: String, required: true },
     otherNames: [{ type: String }],
     cover: { type: String, required: true },
@@ -18,10 +17,11 @@ var bookSchema = new Schema(
     frequency: { type: Schema.Types.ObjectId },
     chapters: [{ type: Schema.Types.ObjectId }],
     volumes: [{ type: Schema.Types.ObjectId }],
+    updated_by: { type: Schema.Types.ObjectId },
     created_at: { type: Schema.Types.Date, default: Date.now },
     available: { type: Schema.Types.Boolean, default: true },
     timerAvailable: { type: Schema.Types.Date },
-    downloadFolder: { type: String }
+    download: { type: String }
   },
   { versionKey: false, timestamps: { updatedAt: "updated_at" } }
 );

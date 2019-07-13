@@ -1,10 +1,11 @@
 const Schema = require("mongoose").Schema;
 
-var bookSchema = new Schema(
+const chapterSchema = new Schema(
   {
-    shortId: {type: String, required: true, unique: true},
+    book: { type: Schema.Types.ObjectId, required: true },
     title: { type: String, required: true },
-    servers: {type: Schema.Types.Map},
+    servers: { type: Map },
+    updated_by: { type: Schema.Types.ObjectId },
     created_at: { type: Schema.Types.Date, default: Date.now },
     available: { type: Schema.Types.Boolean, default: true },
     timerAvailable: { type: Schema.Types.Date },
@@ -13,4 +14,4 @@ var bookSchema = new Schema(
   { versionKey: false, timestamps: { updatedAt: "updated_at" } }
 );
 
-module.exports = bookSchema;
+module.exports = chapterSchema;
