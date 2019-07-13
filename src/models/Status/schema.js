@@ -1,6 +1,6 @@
 const Schema = require("mongoose").Schema;
 
-const categorySchema = new Schema(
+const statusSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String }
@@ -8,4 +8,4 @@ const categorySchema = new Schema(
   { versionKey: false }
 );
 
-module.exports = categorySchema;
+module.exports = statusSchema;

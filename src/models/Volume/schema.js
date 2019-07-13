@@ -1,8 +1,7 @@
 const Schema = require("mongoose").Schema;
 
-var volumeSchema = new Schema(
+const volumeSchema = new Schema(
   {
-    shortId: {type: String, required: true, unique: true},
     title: { type: String, required: true },
     desciption: {type: String},
     book: {type: Schema.Types.ObjectId, required: true},

@@ -1,5 +1,6 @@
-const schema = require('./schema');
+const schema = require("./schema");
+const mongoose = require("mongoose");
 
 //Model middleware here
 
-module.exports = mongoose.model('User', schema);
+module.exports = mongoose.model("User", schema);
