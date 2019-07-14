@@ -4,7 +4,7 @@ const authorSchema = new Schema(
   {
     name: { type: String, required: true },
     originName: {type: String},
-    gender: {type: Schema.Types.Boolean},
+    gender: {type: Schema.Types.Boolean, default: true},
     socials: {type: Map},
     description: { type: String }
   },
