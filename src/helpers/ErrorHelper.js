@@ -20,6 +20,9 @@ const ResponeMessage = {
   InternalServerError: (res, message = httpStatus.INTERNAL_SERVER_ERROR) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json(httpMessage(message));
   },
+  Coflict: (res, message = httpStatus.CONFLICT) => {
+    res.status(httpStatus.CONFLICT).json(httpMessage(message));
+  },
   InError: (res, code = httpStatus.BAD_REQUEST, message) => {
     message = message || httpMessage(code).message;
     res.status(code).json({ message });
