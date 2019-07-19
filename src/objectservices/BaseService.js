@@ -1,15 +1,15 @@
-const createDoc = async (Doc, data) => await new Doc(data).save();
+const createDoc = (Doc, data) => new Doc(data).save();
 
-const listDoc = async Doc => await Doc.find({}).exec();
+const listDoc = Doc => Doc.find({}).exec();
 
-const getDocById = async (Doc, id) => await Doc.findById(id).exec();
+const getDocById = (Doc, id) => Doc.findById(id).exec();
 
-const updateDoc = async ({ Doc, id, updateData }) =>
-  await Doc.findByIdAndUpdate(id, updateData, {
+const updateDoc = ({ Doc, id, updateData }) =>
+  Doc.findByIdAndUpdate(id, updateData, {
     new: true
   }).exec();
 
-const removeDocById = async (Doc, id) => await Doc.findByIdAndDelete(id).exec();
+const removeDocById = (Doc, id) => Doc.findByIdAndDelete(id).exec();
 
 module.exports = {
   createDoc,
