@@ -3,7 +3,7 @@ const {
   BadRequest,
   InternalServerError
 } = require("../../helpers/ErrorHelper");
-const { isString, isNull, isString } = require("lodash");
+const { isString, isNull } = require("lodash");
 
 const create = async (req, res) => {
   try {
