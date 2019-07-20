@@ -8,5 +8,6 @@ router.use("/categories", require("./controllers/category"));
 router.use("/frequencies", require("./controllers/frequency"));
 router.use("/magazines", require("./controllers/magazine"));
 router.use("/publishers", require("./controllers/publisher"));
+router.use("/status", require("./controllers/status"));
 
 module.exports = router;
