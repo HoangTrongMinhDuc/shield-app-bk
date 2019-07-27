@@ -26,8 +26,8 @@ const auth = async (req, res) => {
 
 //Support function
 
-const createToken = (email, expireTime = "24h") => {
-  return jwt.sign({ email }, config.SECRECT_WORD, {
+const createToken = (user, expireTime = "24h") => {
+  return jwt.sign({ ...user }, config.SECRET_WORD, {
     expiresIn: expireTime
   });
 };
@@ -38,10 +38,13 @@ const isMatchPassword = (user, password) => {
 };
 
 const responseUserSession = (res, user) => {
-  let userInfo = user.toObject();
+  const userInfo = user.toObject();
   delete userInfo.hash_password;
   delete userInfo.salt_password;
-  res.json({ token: createToken(user.email), user: userInfo });
+  res.json({
+    token: createToken({ email: user.email, id: user._id }),
+    user: userInfo
+  });
 };
 
 module.exports = auth;

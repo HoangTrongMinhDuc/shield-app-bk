@@ -8,7 +8,16 @@ const Logger = require("./middleware/Logger");
 const db = mongoose.connection;
 
 //Global middleware
-app.use(cors());
+// app.use(cors({ credentials: true }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", config.ENABLE_URL);
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 app.use(Logger);
 
 //Database connect

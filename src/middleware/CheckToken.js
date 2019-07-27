@@ -9,7 +9,7 @@ const CheckToken = (req, res, next) => {
     token = token.slice(begin, token.length);
   }
   if (token) {
-    jwt.verify(token, config.SECRECT_WORD, (err, decoded) => {
+    jwt.verify(token, config.SECRET_WORD, (err, decoded) => {
       if (err) {
         return ErrorHelper.Unauthorized(res, "Your session invalid");
       } else {
