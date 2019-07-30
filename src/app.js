@@ -8,7 +8,6 @@ const Logger = require("./middleware/Logger");
 const db = mongoose.connection;
 
 //Global middleware
-// app.use(cors({ credentials: true }));
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", config.ENABLE_URL);
   res.header(
@@ -28,6 +27,8 @@ db.once("open", () => {
 });
 
 //Route configure
+//Enable prefight method
+app.options("*", cors({ origin: config.ENABLE_URL }));
 //Default index route
 app.get("/", (req, res) => {
   res.send("hello world");
