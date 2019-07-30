@@ -5,7 +5,7 @@ const frequencySchema = new Schema(
     name: { type: String, required: true },
     description: { type: String }
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: { updatedAt: "updated_at" } }
 );
 
 module.exports = frequencySchema;
