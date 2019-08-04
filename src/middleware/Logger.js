@@ -1,5 +1,5 @@
 const Logger = (req, res, next) => {
-    console.log(new Date(), req.path);
+    console.log(req.method, new Date(), req.path);
     next();
 }
 
