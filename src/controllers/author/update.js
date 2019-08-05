@@ -24,7 +24,7 @@ const getParams = req => {
 const isValidParams = req => {
   const { name, gender, socials } = getParams(req);
   if (!name) return false;
-  if (gender && typeof gender !== "boolean") return false;
+  if (gender && typeof gender !== "number") return false;
   if (socials && typeof socials !== "object") return false;
   return true;
 };

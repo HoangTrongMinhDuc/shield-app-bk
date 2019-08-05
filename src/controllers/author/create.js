@@ -24,7 +24,7 @@ const create = async (req, res) => {
 const isValidParams = req => {
   const { name, gender, socials } = req.body;
   if (!name) return false;
-  if (gender && typeof gender !== "boolean") return false;
+  if (gender && typeof gender !== "number") return false;
   if (socials && typeof socials !== "object") return false;
   return true;
 };
