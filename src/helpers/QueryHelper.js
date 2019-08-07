@@ -7,6 +7,7 @@ const paginateQuery = async (query, options) => {
   const total = await Doc.countDocuments(query).exec();
   const pages = Math.ceil(total / DEF_PAGE_SIZE);
   if (page > pages) return { code: 400, message: PageOverflowMsg };
+  query.sort("_id");
   query.skip(DEF_PAGE_SIZE * (page - 1)).limit(DEF_PAGE_SIZE);
   const data = await query.exec();
   return { pages, page, data };
