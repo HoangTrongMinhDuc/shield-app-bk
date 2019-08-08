@@ -8,7 +8,7 @@ const authorSchema = new Schema(
     socials: {type: Map},
     description: { type: String }
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: { createdAt: 'createdDate',updatedAt: 'updatedDate' } }
 );
 
 module.exports = authorSchema;
