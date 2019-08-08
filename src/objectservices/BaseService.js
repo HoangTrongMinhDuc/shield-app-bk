@@ -5,7 +5,7 @@ const listDoc = Doc => Doc.find({}).exec();
 const getDocById = (Doc, id) => Doc.findById(id).exec();
 
 const updateDoc = ({ Doc, id, updateData }) =>
-  Doc.findByIdAndUpdate(id, updateData, {
+  Doc.update({ _id: id }, updateData, {
     new: true
   }).exec();
 
