@@ -5,7 +5,10 @@ const categorySchema = new Schema(
     name: { type: String, required: true },
     description: { type: String }
   },
-  { versionKey: false, timestamps: { updatedAt: "updated_at" } }
+  {
+    versionKey: false,
+    timestamps: { createdAt: "createdDate", updatedAt: "updatedDate" }
+  }
 );
 
 module.exports = categorySchema;
