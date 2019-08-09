@@ -4,14 +4,13 @@ const {
   NotFound,
   BadRequest
 } = require("../../helpers/ErrorHelper");
-const { UpdateSuccessMsg } = require("../../Messages");
 
 const update = async (req, res) => {
   try {
     if (!isValidParams(req)) return BadRequest(res);
     const updatedAuthor = await updateAuthor(getParams(req));
     if (!updatedAuthor) return NotFound(res);
-    res.json({ message: UpdateSuccessMsg });
+    res.json(updatedAuthor);
   } catch (err) {
     InternalServerError(res);
   }

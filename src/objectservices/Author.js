@@ -4,7 +4,11 @@ const { paginateQuery } = require("../helpers/QueryHelper");
 const createAuthor = author => new Author(author).save();
 
 const updateAuthor = ({ authorId, ...updateData }) =>
-  Author.update({ _id: authorId }, updateData).exec();
+  Author.findByIdAndUpdate(
+    authorId,
+    { ...updateData, updatedDate: Date.now() },
+    { new: true }
+  ).exec();
 
 const removeAuthorById = id => Author.findByIdAndDelete(id).exec();
 

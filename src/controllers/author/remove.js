@@ -7,7 +7,7 @@ const remove = async (req, res) => {
     const { authorId } = getParams(req);
     const removed = await removeAuthorById(authorId);
     if (!removed) return NotFound(res);
-    res.json({ message: DeleteSuccessMsg });
+    res.json(removed);
   } catch (err) {
     InternalServerError(res);
   }
