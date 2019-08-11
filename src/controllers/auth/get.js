@@ -8,8 +8,15 @@ const get = async (req, res) => {
     const { id } = req.user;
     const user = await getUserById(id);
     if (!user) return NotFound(res);
-    const { _id, username, displayName, email, join_date } = user;
-    res.json({ _id, username, displayName, email, join_date });
+    const {
+      _id,
+      username,
+      displayName,
+      email,
+      join_date,
+      upload_preset
+    } = user.toJSON();
+    res.json({ _id, username, displayName, email, join_date, upload_preset });
   } catch (err) {
     InternalServerError(res);
   }
