@@ -1,14 +1,17 @@
 const Schema = require("mongoose").Schema;
 
-const authorSchema = new Schema(
+const teamSchema = new Schema(
   {
-    logo: {type: String},
+    logo: { type: String, default: "" },
     name: { type: String, required: true },
-    description: { type: String },
-    leader: { type: Schema.Types.ObjectId },
+    description: { type: String, default: "None" },
+    leader: { type: Schema.Types.ObjectId, required: true },
     members: [{ type: Schema.Types.ObjectId }]
   },
-  { versionKey: false }
+  {
+    versionKey: false,
+    timestamps: { createdAt: "createdDate", updatedAt: "updatedDate" }
+  }
 );
 
-module.exports = authorSchema;
+module.exports = teamSchema;
