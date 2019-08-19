@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const bodyParser = require('body-parser')
+const { JsonWithAuthMw } = require("../../middleware/MidWare");
 
-router.post('/',bodyParser.json(), require('./create'));
+router.post("/", JsonWithAuthMw, require("./create"));
 
 module.exports = router;
