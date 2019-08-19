@@ -7,16 +7,16 @@ const {
   updateDoc
 } = require("./BaseService");
 
-const createBookType = async data => await createDoc(BookType, data);
+const createBookType = data => createDoc(BookType, data);
 
-const listBookType = async () => await listDoc(BookType);
+const listBookType = () => listDoc(BookType);
 
-const getBookTypeById = async id => await getDocById(BookType, id);
+const getBookTypeById = id => getDocById(BookType, id);
 
-const removeBookTypeById = async id => await removeDocById(BookType, id);
+const removeBookTypeById = id => removeDocById(BookType, id);
 
-const updateBookTypeById = async ({ id, ...updateData }) =>
-  await updateDoc({ Doc: BookType, id, updateData });
+const updateBookTypeById = ({ id, ...updateData }) =>
+  updateDoc({ Doc: BookType, id, updateData });
 
 module.exports = {
   createBookType,

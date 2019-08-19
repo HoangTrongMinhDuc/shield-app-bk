@@ -1,20 +1,19 @@
 const UserModel = require("../models/user");
 
-const createUser = async user => {
-  const userOb = new UserModel(user);
-  return await userOb.save().exec();
-};
+const createUser = async user => new UserModel(user).save();
 
-const getUserById = async id => {
-  return await UserModel.findById(id);
-};
+const getUserById = id => UserModel.findById(id);
 
-const getUserByEmailOrUsername = async (username, email) => {
-  return await UserModel.find({})
+const getUserByEmailOrUsername = (username, email) =>
+  UserModel.find({})
     .or([{ username, email }])
     .exec();
+
+const getUserByEmail = email => UserModel.findOne({ email }).exec();
+
+module.exports = {
+  createUser,
+  getUserById,
+  getUserByEmailOrUsername,
+  getUserByEmail
 };
-
-const getUserByEmail = async email => await UserModel.findOne({ email }).exec();
-
-module.exports = { createUser, getUserById, getUserByEmailOrUsername, getUserByEmail };

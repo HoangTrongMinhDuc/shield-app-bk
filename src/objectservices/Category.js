@@ -7,16 +7,16 @@ const {
   updateDoc
 } = require("./BaseService");
 
-const createCategory = async data => await createDoc(Category, data);
+const createCategory = data => createDoc(Category, data);
 
-const listCategory = async () => await listDoc(Category);
+const listCategory = () => listDoc(Category);
 
-const getCategoryById = async id => await getDocById(Category, id);
+const getCategoryById = id => getDocById(Category, id);
 
-const removeCategoryById = async id => await removeDocById(Category, id);
+const removeCategoryById = id => removeDocById(Category, id);
 
-const updateCategoryById = async ({ id, ...updateData }) =>
-  await updateDoc({ Doc: Category, id, updateData });
+const updateCategoryById = ({ id, ...updateData }) =>
+  updateDoc({ Doc: Category, id, updateData });
 
 module.exports = {
   createCategory,
