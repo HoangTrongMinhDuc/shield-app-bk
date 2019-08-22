@@ -13,14 +13,13 @@ const AccessFilter = (requirePers = [], highPers = []) => async (
     if (!user) return Forbidden(res);
     const userPermissions = user.access.toJSON();
     const highPermissions = insertParamToPlaceholder(highPers, req.params);
-    if (!isAllowHighPermission(highPermissions, userPermissions))
-      return Forbidden(res);
+    if (isAllowHighPermission(highPermissions, userPermissions)) return next();
     const requirePermissions = insertParamToPlaceholder(
       requirePers,
       req.params
     );
     if (!isAllowPermission(requirePermissions, userPermissions))
-      return Forbidden(res);
+      return Forbidden(res, "Sorry you not have permission to do this action");
     return next();
   } catch (err) {
     return InternalServerError(res);
@@ -36,8 +35,7 @@ const insertParamToPlaceholder = (pers, params) =>
   );
 
 const isAllowHighPermission = (highPermissions, userPermissions) =>
-  highPermissions.some(per => isAllowProperty(userPermissions, per)) ||
-  isEmpty(highPermissions);
+  highPermissions.some(per => isAllowProperty(userPermissions, per));
 
 const isAllowPermission = (requirePermissions, userPermissions) =>
   requirePermissions.every(per => isAllowProperty(userPermissions, per)) ||
