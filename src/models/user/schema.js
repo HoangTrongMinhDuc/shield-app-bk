@@ -18,7 +18,8 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    status: {type: Boolean, default: true},
+    status: { type: Boolean, default: true },
+    access: { type: Schema.Types.Map, default: {} },
     join_date: { type: Date, default: Date.now }
   },
   { versionKey: false }
