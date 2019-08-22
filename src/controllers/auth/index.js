@@ -1,8 +1,7 @@
 const router = require("express").Router();
-const bodyParser = require("body-parser");
-const CheckToken = require('../../middleware/CheckToken')
+const { AuthMw, JsonMw } = require("../../middleware/MidWare");
 
-router.post("/", bodyParser.json(), require("./auth"));
-router.get("/", [bodyParser.json(), CheckToken], require("./get"));
+router.post("/", JsonMw, require("./auth"));
+router.get("/", AuthMw, require("./get"));
 
 module.exports = router;

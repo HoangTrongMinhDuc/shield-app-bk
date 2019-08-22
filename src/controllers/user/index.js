@@ -1,6 +1,10 @@
 const router = require("express").Router();
-const { JsonWithAuthMw } = require("../../middleware/MidWare");
+const { JsonWithAuthorization } = require("../../middleware/MidWare");
 
-router.post("/", JsonWithAuthMw, require("./create"));
+router.post(
+  "/",
+  JsonWithAuthorization(["system.account.create"]),
+  require("./create")
+);
 
 module.exports = router;

@@ -1,10 +1,26 @@
 const router = require("express").Router();
-const { JsonWithAuthMw, AuthMw } = require("../../middleware/MidWare");
+const { JsonWithAuthorization } = require("../../middleware/MidWare");
 
-router.post("/", JsonWithAuthMw, require("./create"));
-router.put("/:categoryId", JsonWithAuthMw, require("./update"));
+router.post(
+  "/",
+  JsonWithAuthorization(["category.create"]),
+  require("./create")
+);
+
+router.put(
+  "/:categoryId",
+  JsonWithAuthorization(["category.update"]),
+  require("./update")
+);
+
 router.get("/", require("./list"));
+
 router.get("/:categoryId", require("./get"));
-router.delete("/:categoryId", AuthMw, require("./remove"));
+
+router.delete(
+  "/:categoryId",
+  JsonWithAuthorization(["category.delete"]),
+  require("./remove")
+);
 
 module.exports = router;

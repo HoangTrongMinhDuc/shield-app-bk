@@ -1,10 +1,26 @@
 const router = require("express").Router();
-const { JsonWithAuthMw, AuthMw } = require("../../middleware/MidWare");
+const { JsonWithAuthorization } = require("../../middleware/MidWare");
 
-router.post("/", JsonWithAuthMw, require("./create"));
-router.put("/:publisherId", JsonWithAuthMw, require("./update"));
+router.post(
+  "/",
+  JsonWithAuthorization(["publisher.create"]),
+  require("./create")
+);
+
+router.put(
+  "/:publisherId",
+  JsonWithAuthorization(["publisher.update"]),
+  require("./update")
+);
+
 router.get("/", require("./list"));
+
 router.get("/:publisherId", require("./get"));
-router.delete("/:publisherId", AuthMw, require("./remove"));
+
+router.delete(
+  "/:publisherId",
+  JsonWithAuthorization(["publisher.delete"]),
+  require("./remove")
+);
 
 module.exports = router;
