@@ -1,8 +1,6 @@
 const { getUserById } = require("../../objectservices/User");
 const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
 
-//Define controller here
-
 const get = async (req, res) => {
   try {
     const { id } = req.user;
@@ -14,9 +12,18 @@ const get = async (req, res) => {
       displayName,
       email,
       join_date,
-      upload_preset
+      upload_preset,
+      access
     } = user.toJSON();
-    res.json({ _id, username, displayName, email, join_date, upload_preset });
+    res.json({
+      _id,
+      username,
+      displayName,
+      email,
+      join_date,
+      upload_preset,
+      access
+    });
   } catch (err) {
     InternalServerError(res);
   }

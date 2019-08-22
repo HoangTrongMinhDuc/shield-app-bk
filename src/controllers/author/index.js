@@ -1,11 +1,22 @@
 const router = require("express").Router();
-const bodyParser = require("body-parser");
-const CheckToken = require("../../middleware/CheckToken");
+const { JsonWithAuthorization } = require("../../middleware/MidWare");
 
-router.post("/", [bodyParser.json(), CheckToken], require("./create"));
+router.post("/", JsonWithAuthorization(["author.create"]), require("./create"));
+
 router.get("/", require("./list"));
+
 router.get("/:authorId", require("./get"));
-router.delete("/:authorId", CheckToken, require("./remove"));
-router.put("/:authorId", [bodyParser.json(), CheckToken], require("./update"));
+
+router.delete(
+  "/:authorId",
+  JsonWithAuthorization(["author.delete"]),
+  require("./remove")
+);
+
+router.put(
+  "/:authorId",
+  JsonWithAuthorization(["author.update"]),
+  require("./update")
+);
 
 module.exports = router;
