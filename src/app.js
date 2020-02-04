@@ -35,6 +35,6 @@ app.get("/", (req, res) => {
 });
 
 //Set route
+app.use(express.static('statics'));
 app.use("/api", routes);
-
 module.exports = app;
