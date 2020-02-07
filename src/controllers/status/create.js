@@ -1,29 +1,30 @@
-const { createStatus } = require("../../objectservices/Status");
+const { isNull, isString } = require('lodash');
+const { createStatus } = require('../../objectservices/Status');
 const {
   BadRequest,
-  InternalServerError
-} = require("../../helpers/ErrorHelper");
-const { isNull, isString } = require("lodash");
+  InternalServerError,
+  Success,
+} = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({
+  name: req.body.name,
+  description: req.body.description || null,
+});
+
+const isValidParams = (req) => {
+  const { name, description } = getParams(req);
+  return isString(name) && (isNull(description) || isString(description));
+};
 
 const create = async (req, res) => {
   try {
     if (!isValidParams(req)) return BadRequest(res);
     const status = await createStatus(getParams(req));
     if (!status) return InternalServerError(res);
-    res.json(status);
+    return Success(res, status);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
-};
-
-const getParams = req => ({
-  name: req.body.name,
-  description: req.body.description || null
-});
-
-const isValidParams = req => {
-  const { name, description } = getParams(req);
-  return isString(name) && (isNull(description) || isString(description));
 };
 
 module.exports = create;

@@ -1,12 +1,12 @@
-const { listFrequency } = require("../../objectservices/Frequency");
-const { InternalServerError } = require("../../helpers/ErrorHelper");
+const { listFrequency } = require('../../objectservices/Frequency');
+const { InternalServerError, Success } = require('../../helpers/ErrorHelper');
 
 const list = async (req, res) => {
   try {
     const frequencies = await listFrequency();
-    res.json(frequencies);
+    return Success(res, frequencies);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
 

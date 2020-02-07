@@ -1,8 +1,8 @@
+const mongoose = require('mongoose');
 const schema = require('./schema');
-const mongoose = require("mongoose");
-const updateTimestamps = require("../midware/UpdateTimeStamps");
+const updateTimestamps = require('../midware/UpdateTimeStamps');
 
-//Model middleware here
+// Model middleware here
 updateTimestamps(schema);
 
 module.exports = mongoose.model('Status', schema);

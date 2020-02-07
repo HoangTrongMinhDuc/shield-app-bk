@@ -1,19 +1,19 @@
-const { removeFrequencyById } = require("../../objectservices/Frequency");
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
+const { removeFrequencyById } = require('../../objectservices/Frequency');
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({
+  frequencyId: req.params.frequencyId,
+});
 
 const remove = async (req, res) => {
   try {
     const { frequencyId } = getParams(req);
     const frequencyRemoved = await removeFrequencyById(frequencyId);
     if (!frequencyRemoved) return NotFound(res);
-    res.json(frequencyRemoved);
+    return Success(res, frequencyRemoved);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
-
-const getParams = req => ({
-  frequencyId: req.params.frequencyId
-});
 
 module.exports = remove;

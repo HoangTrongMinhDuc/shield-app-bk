@@ -1,4 +1,4 @@
-const Schema = require("mongoose").Schema;
+const { Schema } = require('mongoose');
 
 const userSchema = new Schema(
   {
@@ -8,21 +8,21 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowercase: true
+      lowercase: true,
     },
     hash_password: {
       type: String,
-      required: true
+      required: true,
     },
     salt_password: {
       type: String,
-      required: true
+      required: true,
     },
     status: { type: Boolean, default: true },
     access: { type: Schema.Types.Map, default: {} },
-    join_date: { type: Date, default: Date.now }
+    join_date: { type: Date, default: Date.now },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 module.exports = userSchema;

@@ -1,4 +1,4 @@
-const Schema = require("mongoose").Schema;
+const { Schema } = require('mongoose');
 
 const authorSchema = new Schema(
   {
@@ -6,12 +6,12 @@ const authorSchema = new Schema(
     oname: { type: String },
     gender: { type: Schema.Types.Number, default: 1 },
     socials: { type: Map, default: {} },
-    description: { type: String, default: "None" }
+    description: { type: String, default: 'None' },
   },
   {
     versionKey: false,
-    timestamps: { createdAt: "createdDate", updatedAt: "updatedDate" }
-  }
+    timestamps: { createdAt: 'createdDate', updatedAt: 'updatedDate' },
+  },
 );
 
 module.exports = authorSchema;

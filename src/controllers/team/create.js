@@ -1,9 +1,12 @@
-const { isValidTeamInfo } = require("../../validator/Team");
+const { isValidTeamInfo } = require('../../validator/Team');
 const {
   BadRequest,
-  InternalServerError
-} = require("../../helpers/ErrorHelper");
-const { createTeam } = require("../../objectservices/Team");
+  InternalServerError,
+  Success,
+} = require('../../helpers/ErrorHelper');
+const { createTeam } = require('../../objectservices/Team');
+
+const getParams = (req) => ({ ...req.body });
 
 const create = async (req, res) => {
   try {
@@ -13,15 +16,13 @@ const create = async (req, res) => {
       name,
       description,
       logo,
-      leader: req.user.id
+      leader: req.user.id,
     });
     if (!team) return InternalServerError(res);
-    res.json(team);
+    return Success(res, team);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
-
-const getParams = req => ({ ...req.body });
 
 module.exports = create;

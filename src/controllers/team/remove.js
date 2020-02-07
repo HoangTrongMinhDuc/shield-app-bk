@@ -1,14 +1,13 @@
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
-const { removeTeamById } = require("../../objectservices/Team");
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
+const { removeTeamById } = require('../../objectservices/Team');
 
 const remove = async (req, res) => {
   try {
     const removedTeam = await removeTeamById(req.params.teamId);
     if (!removedTeam) return NotFound(res);
-    res.json(removedTeam);
+    return Success(res, removedTeam);
   } catch (error) {
-    console.log(error);
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
 
