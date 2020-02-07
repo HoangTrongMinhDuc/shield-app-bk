@@ -1,20 +1,18 @@
-const { removeAuthorById } = require("../../objectservices/Author");
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
-const { DeleteSuccessMsg } = require("../../Messages");
+const { removeAuthorById } = require('../../objectservices/Author');
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({ authorId: req.params.authorId });
 
 const remove = async (req, res) => {
   try {
     const { authorId } = getParams(req);
     const removed = await removeAuthorById(authorId);
     if (!removed) return NotFound(res);
-    res.json(removed);
+    return Success(res, removed);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
 
-const getParams = req => {
-  return { authorId: req.params.authorId };
-};
 
 module.exports = remove;

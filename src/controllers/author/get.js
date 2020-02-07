@@ -1,19 +1,17 @@
-const { getAuthorById } = require("../../objectservices/Author");
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
+const { getAuthorById } = require('../../objectservices/Author');
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({ authorId: req.params.authorId });
 
 const get = async (req, res) => {
   try {
     const { authorId } = getParams(req);
     const author = await getAuthorById(authorId);
     if (!author) return NotFound(res);
-    res.json(author);
+    return Success(res, author);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
-};
-
-const getParams = req => {
-  return { authorId: req.params.authorId };
 };
 
 module.exports = get;

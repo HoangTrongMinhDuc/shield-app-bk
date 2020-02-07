@@ -1,5 +1,5 @@
-module.exports = schema => {
-  schema.pre("update", function(next) {
+module.exports = (schema) => {
+  schema.pre('update', function (next) {
     try {
       this._update.updatedDate = Date.now();
     } catch (err) {
@@ -8,7 +8,7 @@ module.exports = schema => {
       next();
     }
   });
-  schema.pre("findByIdAndUpdate", function(next) {
+  schema.pre('findByIdAndUpdate', function (next) {
     try {
       this._update.updatedDate = Date.now();
     } catch (err) {

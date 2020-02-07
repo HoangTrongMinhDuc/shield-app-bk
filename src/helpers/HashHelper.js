@@ -1,16 +1,13 @@
-const crypto = require("crypto");
-const DEFAULT_LENGHT = 24;
+const crypto = require('crypto');
 
-const getHashString = (sourceString, saltString) => {
-  return crypto
-    .createHash("sha256")
-    .update(sourceString + saltString)
-    .digest("hex")
-    .toString();
-};
+const DEFAULT_LENGTH = 24;
 
-const getRandomString = (length = DEFAULT_LENGHT) => {
-  return crypto.randomBytes(length).toString("hex");
-};
+const getHashString = (sourceString, saltString) => crypto
+  .createHash('sha256')
+  .update(sourceString + saltString)
+  .digest('hex')
+  .toString();
+
+const getRandomString = (length = DEFAULT_LENGTH) => crypto.randomBytes(length).toString('hex');
 
 module.exports = { getHashString, getRandomString };

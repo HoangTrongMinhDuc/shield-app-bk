@@ -1,10 +1,11 @@
-const { updateTeamById } = require("../../objectservices/Team");
+const { updateTeamById } = require('../../objectservices/Team');
 const {
   InternalServerError,
   BadRequest,
-  NotFound
-} = require("../../helpers/ErrorHelper");
-const { isValidTeamInfo } = require("../../validator/Team");
+  NotFound,
+  Success,
+} = require('../../helpers/ErrorHelper');
+const { isValidTeamInfo } = require('../../validator/Team');
 
 const update = async (req, res) => {
   try {
@@ -14,12 +15,12 @@ const update = async (req, res) => {
       id: req.params.teamId,
       name,
       description,
-      logo
+      logo,
     });
     if (!updatedTeam) return NotFound(res);
-    res.json(updatedTeam);
+    return Success(res, updatedTeam);
   } catch (error) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
 

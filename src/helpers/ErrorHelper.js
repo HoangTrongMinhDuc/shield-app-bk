@@ -1,7 +1,7 @@
-const httpStatus = require("http-status");
-const httpMessage = require("http-errors");
+const httpStatus = require('http-status');
+const httpMessage = require('http-errors');
 
-const ResponeMessage = {
+const ResponseMessage = {
   BadRequest: (res, message = httpStatus.BAD_REQUEST) => {
     res.status(httpStatus.BAD_REQUEST).json(httpMessage(message));
   },
@@ -20,13 +20,13 @@ const ResponeMessage = {
   InternalServerError: (res, message = httpStatus.INTERNAL_SERVER_ERROR) => {
     res.status(httpStatus.INTERNAL_SERVER_ERROR).json(httpMessage(message));
   },
-  Coflict: (res, message = httpStatus.CONFLICT) => {
+  Conflict: (res, message = httpStatus.CONFLICT) => {
     res.status(httpStatus.CONFLICT).json(httpMessage(message));
   },
-  InError: (res, code = httpStatus.BAD_REQUEST, message) => {
-    message = message || httpMessage(code).message;
+  InError: (res, code = httpStatus.BAD_REQUEST, message = httpMessage(code).message) => {
     res.status(code).json({ message });
-  }
+  },
+  Success: (res, data = { message: 'OK' }) => res.status(httpStatus.OK).json(data),
 };
 
-module.exports = ResponeMessage;
+module.exports = ResponseMessage;

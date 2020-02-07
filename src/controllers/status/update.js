@@ -1,30 +1,31 @@
-const { updateStatusById } = require("../../objectservices/Status");
+const { isString, isUndefined } = require('lodash');
+const { updateStatusById } = require('../../objectservices/Status');
 const {
   BadRequest,
   InternalServerError,
-  NotFound
-} = require("../../helpers/ErrorHelper");
-const { isString, isUndefined } = require("lodash");
+  NotFound,
+  Success,
+} = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({
+  id: req.params.statusId,
+  ...req.body,
+});
+
+const isValidParams = (req) => {
+  const { name, description } = getParams(req);
+  return isString(name) && (isUndefined(description) || isString(description));
+};
 
 const update = async (req, res) => {
   try {
     if (!isValidParams(req)) return BadRequest(res);
     const statusUpdated = await updateStatusById(getParams(req));
     if (!statusUpdated) return NotFound(res);
-    res.json(statusUpdated);
+    return Success(res, statusUpdated);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
-};
-
-const getParams = req => ({
-  id: req.params.statusId,
-  ...req.body
-});
-
-const isValidParams = req => {
-  const { name, description } = getParams(req);
-  return isString(name) && (isUndefined(description) || isString(description));
 };
 
 module.exports = update;

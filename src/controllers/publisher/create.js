@@ -1,29 +1,30 @@
-const { createPublisher } = require("../../objectservices/Publisher");
+const { isNull, isString } = require('lodash');
+const { createPublisher } = require('../../objectservices/Publisher');
 const {
   BadRequest,
-  InternalServerError
-} = require("../../helpers/ErrorHelper");
-const { isNull, isString } = require("lodash");
+  InternalServerError,
+  Success,
+} = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({
+  name: req.body.name,
+  description: req.body.description || null,
+});
+
+const isValidParams = (req) => {
+  const { name, description } = getParams(req);
+  return isString(name) && (isNull(description) || isString(description));
+};
 
 const create = async (req, res) => {
   try {
     if (!isValidParams(req)) return BadRequest(res);
     const publisher = await createPublisher(getParams(req));
     if (!publisher) return InternalServerError(res);
-    res.json(publisher);
+    return Success(res, publisher);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
-};
-
-const getParams = req => ({
-  name: req.body.name,
-  description: req.body.description || null
-});
-
-const isValidParams = req => {
-  const { name, description } = getParams(req);
-  return isString(name) && (isNull(description) || isString(description));
 };
 
 module.exports = create;

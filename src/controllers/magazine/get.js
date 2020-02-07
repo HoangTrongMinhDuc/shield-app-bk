@@ -1,19 +1,19 @@
-const { getMagazineById } = require("../../objectservices/Magazine");
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
+const { getMagazineById } = require('../../objectservices/Magazine');
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({
+  magazineId: req.params.magazineId,
+});
 
 const get = async (req, res) => {
   try {
     const { magazineId } = getParams(req);
     const magazine = await getMagazineById(magazineId);
     if (!magazine) return NotFound(res);
-    res.json(magazine);
+    return Success(res, magazine);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
-
-const getParams = req => ({
-  magazineId: req.params.magazineId
-});
 
 module.exports = get;

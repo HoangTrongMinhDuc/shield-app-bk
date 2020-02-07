@@ -1,12 +1,12 @@
-const { InternalServerError } = require("../../helpers/ErrorHelper");
-const { listTeam } = require("../../objectservices/Team");
+const { InternalServerError, Success } = require('../../helpers/ErrorHelper');
+const { listTeam } = require('../../objectservices/Team');
 
 const list = async (req, res) => {
   try {
     const teams = await listTeam();
-    res.json(teams);
+    return Success(res, teams);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
 

@@ -1,5 +1,5 @@
-const { getUserById } = require("../../objectservices/User");
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
+const { getUserById } = require('../../objectservices/User');
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
 
 const get = async (req, res) => {
   try {
@@ -11,21 +11,19 @@ const get = async (req, res) => {
       username,
       displayName,
       email,
-      join_date,
-      upload_preset,
-      access
+      upload_preset: uploadPreset,
+      access,
     } = user.toJSON();
-    res.json({
+    return Success(res, {
       _id,
       username,
       displayName,
       email,
-      join_date,
-      upload_preset,
-      access
+      uploadPreset,
+      access,
     });
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
 

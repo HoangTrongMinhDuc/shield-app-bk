@@ -1,11 +1,11 @@
-const Schema = require("mongoose").Schema;
+const { Schema } = require('mongoose');
 
 const bookSchema = new Schema(
   {
     title: { type: String, required: true },
     otherNames: [{ type: String }],
     cover: { type: String, required: true },
-    desciption: { type: String, default: "None" },
+    desciption: { type: String, default: 'None' },
     author: { type: Schema.Types.ObjectId, required: true },
     teams: [{ type: Schema.Types.ObjectId }],
     status: { type: Schema.Types.ObjectId },
@@ -21,9 +21,9 @@ const bookSchema = new Schema(
     created_at: { type: Schema.Types.Date, default: Date.now },
     available: { type: Schema.Types.Boolean, default: true },
     timerAvailable: { type: Schema.Types.Date },
-    download: { type: String }
+    download: { type: String },
   },
-  { versionKey: false, timestamps: { updatedAt: "updated_at" } }
+  { versionKey: false, timestamps: { updatedAt: 'updated_at' } },
 );
 
 module.exports = bookSchema;

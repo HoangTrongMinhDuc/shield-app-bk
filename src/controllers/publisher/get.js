@@ -1,19 +1,19 @@
-const { getPublisherById } = require("../../objectservices/Publisher");
-const { InternalServerError, NotFound } = require("../../helpers/ErrorHelper");
+const { getPublisherById } = require('../../objectservices/Publisher');
+const { InternalServerError, NotFound, Success } = require('../../helpers/ErrorHelper');
+
+const getParams = (req) => ({
+  publisherId: req.params.publisherId,
+});
 
 const get = async (req, res) => {
   try {
     const { publisherId } = getParams(req);
     const publisher = await getPublisherById(publisherId);
     if (!publisher) return NotFound(res);
-    res.json(publisher);
+    return Success(res, publisher);
   } catch (err) {
-    InternalServerError(res);
+    return InternalServerError(res);
   }
 };
-
-const getParams = req => ({
-  publisherId: req.params.publisherId
-});
 
 module.exports = get;
