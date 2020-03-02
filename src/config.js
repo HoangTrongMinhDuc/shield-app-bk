@@ -7,4 +7,5 @@ module.exports = {
   SECRET_WORD: process.env.SECRET_WORD,
   DEF_PAGE_SIZE: 20,
   ENABLE_URL: process.env.ENABLE_URL,
+  SENTRY: process.env.SENTRY,
 };
