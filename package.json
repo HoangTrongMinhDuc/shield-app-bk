@@ -11,7 +11,7 @@
   "author": "hoangtrongminhduc",
   "license": "MIT",
   "dependencies": {
-    "@hapi/joi": "^15.1.0",
+    "@hapi/joi": "^15.1.1",
     "@sentry/node": "^5.12.4",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
